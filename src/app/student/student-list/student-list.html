@@ -1,0 +1,31 @@
+<div class="container mx-auto p-6">
+  <h2 class="text-2xl font-semibold mb-4">Student List</h2>
+  <button mat-button routerLink="/students/add" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mb-4">Add New Student</button>
+  <input matInput placeholder="Search by name..." [(ngModel)]="searchTerm" class="border border-gray-300 rounded px-3 py-2 mb-4 w-full" />
+
+  <table class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
+    <thead>
+      <tr class="text-left bg-gray-100">
+        <th class="px-4 py-2">ID</th>
+        <th class="px-4 py-2">Name</th>
+        <th class="px-4 py-2">Age</th>
+        <th class="px-4 py-2">Grade</th>
+        <th class="px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (student of filteredStudents(); track student.id; let i = $index) {
+        <tr class="border-b">
+          <td class="px-4 py-2">{{ i + 1}}</td>
+          <td class="px-4 py-2">{{ student.name }}</td>
+          <td class="px-4 py-2">{{ student.age }}</td>
+          <td class="px-4 py-2">{{ student.grade }}</td>
+          <td class="px-4 py-2">
+            <button mat-button (click)="onEdit(student.id)" class="bg-yellow-400 text-white py-1 px-3 rounded hover:bg-yellow-500">Edit</button>
+            <button mat-button (click)="onDelete(student.id)" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
