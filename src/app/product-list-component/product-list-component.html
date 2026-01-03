@@ -1,0 +1,11 @@
+<section class="bg-gray-100 py-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  @if(isFetchingProduct()){
+  <p>Loading products...</p>
+  } @else { @for (pro of products$ | async; track $index) {
+  <div class="p-4 border rounded-lg shadow-md">
+    <img src="{{ pro.images[0] }}" alt="{{ pro.title }}" />
+    <h2 class="text-xl font-bold mb-2">{{ pro.title }}</h2>
+    <span class="text-green-600 font-semibold">{{ pro.price | currency }}</span>
+  </div>
+  } }
+</section>

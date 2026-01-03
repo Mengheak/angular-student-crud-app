@@ -1,0 +1,70 @@
+<div class="max-w-xl mx-auto mt-8 p-6 bg-white rounded-2xl shadow-lg border border-slate-200">
+  <h2 class="text-2xl font-bold text-slate-800 mb-4">Todo List</h2>
+  <p class="text-red-600 my-2">{{ message() }}</p>
+  <!-- Input Row -->
+  <div class="flex flex-col sm:flex-row gap-3 mb-5">
+    <input
+      [(ngModel)]="newText"
+      placeholder="Write a task..."
+      (keydown.enter)="addTodo()"
+      class="flex-1 px-4 py-3 rounded-xl border border-slate-300 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-slate-400 text-slate-800"
+    />
+
+    <button
+      (click)="addTodo()"
+      class="px-4 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 active:scale-[0.98] transition"
+    >
+      Add
+    </button>
+
+    <button
+      (click)="clearDone()"
+      class="px-4 py-3 rounded-xl bg-slate-100 text-slate-800 font-semibold hover:bg-slate-200 active:scale-[0.98] transition"
+    >
+      Clear done
+    </button>
+  </div>
+
+  <!-- Empty State -->
+  @if (todos.length === 0) {
+  <div class="py-8 text-center">
+    <p class="text-slate-500">No tasks yet.</p>
+    <p class="text-sm text-slate-400 mt-1">Add your first task above 👆</p>
+  </div>
+  } @else {
+  <ul class="space-y-3">
+    @for (t of todos; track t.id) {
+    <li
+      class="flex items-start justify-between gap-4 p-4 rounded-2xl border border-slate-200 bg-slate-50"
+      [class.opacity-60]="t.done"
+    >
+      <div class="flex items-start gap-3">
+        <input
+          type="checkbox"
+          [checked]="t.done"
+          (change)="toggle(t)"
+          class="mt-1 h-5 w-5 rounded-md border-slate-300 text-blue-600 focus:ring-blue-500"
+        />
+
+        <div>
+          <p class="font-semibold text-slate-800" [class.line-through]="t.done">
+            {{ t.text | uppercase }}
+          </p>
+
+          <small class="text-slate-500">
+            {{ t.createdAt | date : 'short' }}
+          </small>
+        </div>
+      </div>
+
+      <button
+        class="px-3 py-2 rounded-xl bg-red-50 text-red-600 font-semibold hover:bg-red-100 active:scale-[0.98] transition"
+        (click)="remove(t.id)"
+      >
+        Delete
+      </button>
+    </li>
+    }
+  </ul>
+  }
+</div>

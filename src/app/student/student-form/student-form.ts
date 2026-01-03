@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IStudent, Student } from '../../services/student';
+import { IStudent, Student } from '../../services/student/student';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';

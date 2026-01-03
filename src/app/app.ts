@@ -1,14 +1,15 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from "../core/layout/shell-component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet], // Make sure RouterOutlet is imported
+  imports: [RouterOutlet, NavbarComponent], // Make sure RouterOutlet is imported
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
 export class App {
-  protected readonly title = signal('angular-tailwindcss');
+  protected readonly title = signal<string>('Basic Angular By Heak');
 }
